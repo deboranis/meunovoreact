@@ -9,7 +9,8 @@ class Home extends Component {
 
     this.state = {
         inputValue: "",
-        data: []
+        data: [],
+        filters: ['Todos', 'Front', 'Back', 'Design', 'Junior', 'Pleno', 'Senior']
     };
   }
 
@@ -19,10 +20,6 @@ class Home extends Component {
     this.setState({ data: getData })
     console.log(this.state.data)
   }
-
-  // componentDidUpdate = () => {
-  //   console.log("o componente foi atualizado!!");
-  // }
 
   onClick = async () => {
     const {inputValue, data} = this.state;
@@ -44,22 +41,42 @@ class Home extends Component {
     this.setState({ inputValue: value })
   };
 
-  render() {
+  handleFilters = (e) => {
+    const {data} = this.props;
+    const value = e.target.id.toLowerCase();
+
+    const result = data.filter(item => {
+      switch(value){
+        case "todos":
+          return item;
+        default:
+          return item.position.toLowerCase().includes(value);
+      }
+    });
+
+    this.setState({data: result});
+  };
+
+    render() {
     console.log('o render foi chamado!');
-    const {inputValue, data} = this.state
-    return (
-      <GeneralTemplate>
-        {/*Todos os componentes aqui dentro sao filhos (children) do General Template*/}
-                    <HomeContent
-                    texto="Buscar"
-                    onClick={this.onClick}
-                    type="text"
-                    placeholder="O que você procura?"
-                    value={inputValue}
-                    data={data}
-                    onChange={this.onChange} 
-                    />
-      </GeneralTemplate>
+    const {inputValue, data, filters} = this.state
+
+      return (
+        <GeneralTemplate>
+          {/*Todos os componentes aqui dentro sao filhos (children) do General Template*/}
+                      <HomeContent
+                      titulo="TechJobs"
+                      texto="Buscar"
+                      onClick={this.onClick}
+                      type="text"
+                      placeholder="O que você procura?"
+                      value={inputValue}
+                      data={data}
+                      filters={filters}
+                      onChange={this.onChange}
+                      handleFilters={this.handleFilters}
+                      />
+        </GeneralTemplate>
     );
   }
 }

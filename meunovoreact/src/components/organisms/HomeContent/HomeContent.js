@@ -1,26 +1,31 @@
 import React from 'react';
 import SearchBar from '../../molecules/SearchBar/SearchBar';
 import Card from "../../molecules/Card/Card";
+import FilterBar from '../../molecules/FilterBar/FilterBar'
+import MainTitle from "../../atoms/MainTitle/MainTitle";
 import "./HomeContent.css"
 
 
-const HomeContent =({texto, onClick, type, placeholder, value, onChange, data}) =>{
+const HomeContent =({texto, titulo, onClick, handleFilters, type, placeholder, value, onChange, data, filters}) =>{
     return(
-        <main>
-            <h1>TechJobs</h1>
+        <main className="homeContent--container">
+            <MainTitle texto={titulo} />
                 <section>
                     <SearchBar 
                         texto={texto}
+                        titulo={titulo}
                         onClick={onClick}
                         type={type}
                         placeholder={placeholder}
                         value={value}
                         onChange={onChange}
-                    />
-                    <div>
-                        <h2>FILTROS</h2>
-                    </div>
+                        />
+                        <FilterBar 
+                        filters={filters}
+                        onClick={handleFilters} 
+                        />
                 </section>
+
                 <section>
                     {data ? (
                         data.map(item => {
