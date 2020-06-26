@@ -59,10 +59,14 @@ class Home extends Component {
 
     render() {
     console.log('o render foi chamado!');
-    const {inputValue, data, filters} = this.state
+    const {inputValue, data, filters} = this.state;
+    const {logout, loggedUser} = this.props;
 
       return (
-        <GeneralTemplate>
+        <GeneralTemplate
+        logout={logout}
+        loggedUser={loggedUser}
+        >
           {/*Todos os componentes aqui dentro sao filhos (children) do General Template*/}
                       <HomeContent
                       titulo="TechJobs"

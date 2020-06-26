@@ -4,12 +4,28 @@ import LoginContent from '../../components/organisms/LoginContent/LoginContent';
 import './Login.css';
 
 class Login extends Component{
+    constructor() {
+        super();
+
+        this.state={}
+    }
+
+    onFinish = value => {
+        console.log("Dados enviados", value);
+        this.props.history.push("/");
+    };
+
     render(){
+        const {login, loggedUser} = this.props;
         return(
-            <GeneralTemplate>
-                <LoginContent titulo="Acesse sua conta"/>
+            <GeneralTemplate loggedUser={loggedUser}>
+                <LoginContent 
+                titulo="Acesse sua conta" 
+                onFinish={this.onFinish}
+                login={login} 
+                />
             </GeneralTemplate>
-        )
+        );
     }
 }
 
