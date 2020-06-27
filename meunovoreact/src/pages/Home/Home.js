@@ -9,35 +9,29 @@ class Home extends Component {
 
     this.state = {
         inputValue: "",
-        data: [],
+        data: [], //esse array é mutável
         filters: ['Todos', 'Front', 'Back', 'Design', 'Junior', 'Pleno', 'Senior']
     };
   }
 
   componentDidMount = async () => {
-    console.log('O componente foi montado!!')
     const getData = await this.props.data;
     this.setState({ data: getData })
-    console.log(this.state.data)
   }
 
   onClick = async () => {
-    const {inputValue, data} = this.state;
+    const {inputValue} = this.state;
+    const { data } = this.props; //imutável
 
     if(inputValue && data.length) {
-    const result = await data.filter(itenzinho => itenzinho.position.toLowerCase().includes(inputValue.toLowerCase()));
-    
-    console.log({result});
+    const result = await data.filter(itenzinho => 
+      itenzinho.position.toLowerCase().includes(inputValue.toLowerCase()));
     this.setState({inputValue: "" });
-    
-    } else {
-    console.log('sem input ou sem data');
     }
   };
 
   onChange = (e) => {
     const value = e.target.value;
-    console.log(value);
     this.setState({ inputValue: value })
   };
 
@@ -58,7 +52,6 @@ class Home extends Component {
   };
 
     render() {
-    console.log('o render foi chamado!');
     const {inputValue, data, filters} = this.state;
     const {logout, loggedUser} = this.props;
 

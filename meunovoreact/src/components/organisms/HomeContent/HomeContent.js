@@ -28,7 +28,7 @@ const HomeContent =({texto, titulo, onClick, handleFilters, type, placeholder, v
 
                 <section>
                     {data ? (
-                        data.map(item => {
+                        data.map((item,index) => {
                             const {logo, company, position, postedAt, contract, location, languages, tools} = item;
                             return (
                         <Card 
@@ -40,6 +40,7 @@ const HomeContent =({texto, titulo, onClick, handleFilters, type, placeholder, v
                             location={location}
                             languages={languages}
                             tools={tools}
+                            key={`${index+1}--card`}
                         />
                         )})
                     ) : (

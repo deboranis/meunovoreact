@@ -5,7 +5,6 @@ import './SignUp.css';
 
 class SignUp extends Component {
     onFinish = values => {
-        console.log('Dados cadastrados', values);
         this.props.history.push("/");
     };
 
@@ -13,7 +12,11 @@ class SignUp extends Component {
         const {login, loggedUser} = this.props;
         return(
             <GeneralTemplate loggedUser={loggedUser}>
-                <SignUpContent texto="Crie sua conta" onFinish={this.onFinish} login={login} />
+                <SignUpContent 
+                texto="Crie sua conta" 
+                onFinish={this.onFinish} 
+                login={login} 
+                />
             </GeneralTemplate>
         );
     }
